@@ -1,0 +1,4 @@
+/* Global stylesheet. Import order matters: tokens define the custom
+   properties that base.css consumes. */
+@import '../styles/tokens.css';
+@import '../styles/base.css';

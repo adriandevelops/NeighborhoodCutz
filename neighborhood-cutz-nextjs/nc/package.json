@@ -1,0 +1,24 @@
+{
+  "name": "neighborhood-cutz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing site for Neighborhood Cutz barbershop, Los Angeles. Built by North Code LLC.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.21",
+    "next": "^15.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "swiper": "^12.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "^15.5.4"
+  }
+}

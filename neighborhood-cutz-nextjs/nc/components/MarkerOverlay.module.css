@@ -1,0 +1,11 @@
+.overlay { position: fixed; inset: .9em; pointer-events: none; z-index: 90; opacity: 0; }
+.overlay i {
+  position: absolute; width: .55em; height: .55em;
+  border: 0 solid var(--c-light); mix-blend-mode: difference;
+}
+.tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+.ml { top: 50%; left: 0; height: 1.1em; border-top-width: 1px; border-bottom-width: 1px; border-left-width: 1px; translate: 0 -50%; }
+.mr { top: 50%; right: 0; height: 1.1em; border-top-width: 1px; border-bottom-width: 1px; border-right-width: 1px; translate: 0 -50%; }

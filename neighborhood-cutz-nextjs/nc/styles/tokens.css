@@ -1,0 +1,51 @@
+/* ============================================================
+   FLUID SIZING ENGINE
+   Root font-size scales with the viewport, everything else is em.
+   At a 1440px viewport this resolves to exactly 16px.
+
+   Do not hardcode px in component styles. Use em so a single
+   breakpoint change rescales the whole layout proportionally.
+   ============================================================ */
+:root {
+  --size-unit: 16;
+  --size-container-ideal: 1440;
+  --size-container-min: 992px;
+  --size-container-max: 2560px;
+  --size-container: clamp(var(--size-container-min), 100vw, var(--size-container-max));
+  --size-font: calc(var(--size-container) / (var(--size-container-ideal) / var(--size-unit)));
+}
+@media (min-width: 1921px) { :root { --size-font: 21.333px; } }
+@media (max-width: 991px)  { :root { --size-container-ideal: 834; --size-container-min: 768px; --size-container-max: 991px; } }
+@media (max-width: 767px)  { :root { --size-container-ideal: 600; --size-container-min: 480px; --size-container-max: 767px; } }
+@media (max-width: 479px)  { :root { --size-container-ideal: 390; --size-container-min: 320px; --size-container-max: 479px; } }
+
+/* ============================================================
+   DESIGN TOKENS
+   Every colour, type size and spacing value on the site starts here.
+   ============================================================ */
+body {
+  --font-body: var(--font-chivo-mono), ui-monospace, monospace;
+  --font-display: var(--font-archivo), Helvetica, Arial, sans-serif;
+
+  --c-light: #fff;
+  --c-dark: #000;
+  --c-brand: #e01f26;        /* barber-pole red */
+  --c-hover: #00deff;
+  --c-line: #909090;
+  --c-mute: rgba(0, 0, 0, .5);
+  --c-open: #1c9c4a;         /* "open now" indicator */
+
+  --t-h-lg: 4.25em;
+  --t-h-md: 3.25em;
+  --t-tag: .75em;
+
+  --pad-global: 2.5em;
+  --pad-section: 8em;
+  --gap-col: 1.25em;
+  --gap-sm: 1.5em;
+  --gap-md: 3em;
+
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+@media (max-width: 991px) { body { --t-h-lg: 3em; --t-h-md: 2.25em; --pad-section: 5em; } }
+@media (max-width: 767px) { body { --t-h-lg: 2.25em; --t-h-md: 1.75em; --pad-global: 1.25em; --pad-section: 3.5em; } }

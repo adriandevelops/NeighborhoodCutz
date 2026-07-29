@@ -1,0 +1,22 @@
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap-col); }
+
+.item { position: relative; overflow: hidden; background: #ededed; display: block; }
+.shot { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform .8s var(--ease-out); }
+.item:hover .shot { transform: scale(1.04); }
+
+.crop { opacity: 0; transition: opacity .5s var(--ease-out); color: #fff; z-index: 2; }
+.item:hover .crop { opacity: 1; }
+
+/* Tile spans, referenced from content/gallery.js by name. */
+.wide { grid-column: span 6; aspect-ratio: 4/3; }
+.tall { grid-column: span 3; aspect-ratio: 3/4; }
+.sq   { grid-column: span 3; aspect-ratio: 1; }
+
+@media (max-width: 991px) {
+  .wide, .tall, .sq { grid-column: span 6; }
+}
+@media (max-width: 767px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+  .wide, .tall, .sq { grid-column: span 4; }
+  .tall { aspect-ratio: 4/5; }
+}

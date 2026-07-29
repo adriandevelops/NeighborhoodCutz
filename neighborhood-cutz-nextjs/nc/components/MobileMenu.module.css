@@ -1,0 +1,38 @@
+.trigger {
+  position: fixed; top: 1.25em; right: var(--pad-global); z-index: 101;
+  color: var(--c-light); mix-blend-mode: difference;
+  opacity: 0; transform: translateY(-2em); display: none;
+  padding: .75em .25em;                    /* keeps a 44px tap target */
+}
+@media (max-width: 991px) { .trigger { display: block; } }
+
+.wrap { position: fixed; inset: 0; z-index: 150; visibility: hidden; pointer-events: none; }
+.isOpen { visibility: visible; pointer-events: auto; }
+.shade { position: absolute; inset: 0; background: rgba(0, 0, 0, .45); opacity: 0; }
+
+.panel {
+  position: absolute; top: 0; right: 0;
+  width: min(100%, 26em); height: 100%;
+  background: var(--c-light); color: var(--c-dark);
+  transform-origin: 100% 0%; transform: scale(0); will-change: transform;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 1.25em var(--pad-global) 2em; overflow-y: auto;
+}
+.head { display: flex; align-items: center; justify-content: space-between; }
+.close { width: 2.75em; height: 2.75em; display: grid; place-items: center; margin-right: -.75em; }
+.close svg { width: .55em; height: .55em; }
+.rule { height: 1px; background: rgba(0, 0, 0, .2); margin: 1.25em 0; }
+
+.list { display: flex; flex-direction: column; }
+.link {
+  display: flex; align-items: center; gap: .75em;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 2em; line-height: 1.15; letter-spacing: -.02em;
+  padding: .15em 0;
+}
+.linkDot { width: .18em; height: .18em; background: currentColor; flex: none; opacity: 0; transition: opacity .3s ease; }
+.link:hover .linkDot, .link:focus-visible .linkDot { opacity: 1; }
+
+.cta { margin-top: 1.25em; }
+.social { display: flex; flex-wrap: wrap; gap: 1.25em; }
+.social a { padding: .5em 0; }

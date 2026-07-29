@@ -1,0 +1,77 @@
+.hero { position: relative; height: 100vh; height: 100svh; overflow: hidden; background: #000; }
+.bg { position: absolute; inset: 0; }
+
+/* Starts at zero size. Intro.jsx grows it to full viewport. */
+.media {
+  position: absolute; top: 50%; left: 50%; translate: -50% -50%;
+  width: 0; height: 0; overflow: hidden; z-index: 1; opacity: 0;
+}
+.mediaInner { width: 100%; height: 100%; padding: .625em; }
+
+/* container-type: size lets the iframe cover correctly at every stage of
+   the growth animation. Iframes cannot use object-fit, and the box changes
+   aspect ratio mid-timeline, so viewport units will not hold. */
+.mediaFill { position: relative; width: 100%; height: 100%; overflow: hidden; container-type: size; }
+.mediaFill video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mediaFill iframe {
+  position: absolute; top: 50%; left: 50%; translate: -50% -50%;
+  border: 0; pointer-events: none;
+  width: max(100cqw, calc(100cqh * 16 / 9));
+  height: max(100cqh, calc(100cqw * 9 / 16));
+}
+
+/* Readability layer under the white logo and copy. Raise for busier footage. */
+.scrim { position: absolute; inset: 0; background: #000; opacity: .35; pointer-events: none; }
+
+/* Load counter, bottom centre of the hero. */
+.loaderWrap {
+  position: absolute; inset: 0; z-index: 4;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 0 var(--pad-global) 2.75em;
+}
+.loader { opacity: 0; display: flex; flex-direction: column; align-items: center; gap: .75em; color: #fff; mix-blend-mode: difference; }
+.loaderBar { width: 7em; height: 1px; background: rgba(255, 255, 255, .35); }
+.loaderBarInner { width: 0%; height: 100%; background: var(--c-brand); }
+
+.logoWrap {
+  position: absolute; top: 50%; left: 50%; translate: -50% -50%;
+  z-index: 5; transform: scale(0); transform-origin: center;
+  width: 26em; height: 12em; display: grid; place-items: center; gap: .5em;
+  align-content: center; text-align: center;
+}
+.logo {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 3.4em; line-height: .92; letter-spacing: -.05em;
+  color: #fff; mix-blend-mode: difference;
+}
+.sub { color: #fff; mix-blend-mode: difference; }
+.logoCrop { color: #fff; mix-blend-mode: difference; opacity: 0; }
+
+.bottom { position: absolute; left: 0; right: 0; bottom: 1.75em; z-index: 6; }
+.bottom > :global(.container) { position: relative; }
+.copy { grid-column: 1 / 6; color: #fff; mix-blend-mode: difference; display: flex; flex-direction: column; gap: .75em; }
+
+.status {
+  grid-column: 9 / 13; display: flex; flex-direction: column; gap: .6em;
+  background: rgba(0, 0, 0, .4); backdrop-filter: blur(20px); padding: 1em; color: #fff;
+}
+.status :global(.btn) { border-color: rgba(255, 255, 255, .5); }
+.statusLine { display: flex; align-items: center; gap: .5em; font-size: var(--t-tag); letter-spacing: .06em; }
+
+.dot { width: .5em; height: .5em; flex: none; background: var(--c-line); border-radius: 50%; }
+.dotOpen { background: var(--c-open); animation: pulse 2.4s infinite; }
+.dotClosed { background: var(--c-brand); }
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(28, 156, 74, .6); }
+  70%  { box-shadow: 0 0 0 .55em rgba(28, 156, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(28, 156, 74, 0); }
+}
+
+@media (max-width: 767px) {
+  .bottom { bottom: 1.25em; }
+  .copy { grid-column: 1 / 5; }
+  .status { grid-column: 1 / 5; margin-top: 1em; }
+  .logoWrap { width: 17em; height: 11em; }
+  .logo { font-size: 2.5em; }
+}

@@ -1,0 +1,6 @@
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 95; display: none;
+  background: var(--c-brand); color: #fff; text-align: center;
+  padding: 1em; font-size: var(--t-tag); letter-spacing: .08em;
+}
+@media (max-width: 767px) { .bar { display: block; } }

@@ -1,0 +1,27 @@
+.intro { max-width: 34em; }
+
+/* The plus sign hangs in the left gutter, outside the image column. */
+.card {
+  display: grid; grid-template-columns: 1.25em 1fr;
+  column-gap: 1.25em; row-gap: .75em; align-items: start;
+}
+.thumbWrap { grid-column: 2; grid-row: 1; position: relative; aspect-ratio: 4/5; overflow: hidden; background: #f2f0ec; }
+.thumb { width: 100%; height: 100%; background-size: cover; background-position: center; }
+
+.plus { grid-column: 1; grid-row: 2; position: relative; width: 1.25em; height: 1.25em; }
+.plusH, .plusV { position: absolute; inset: 0; margin: auto; background: currentColor; }
+.plusH { height: 1px; }
+.plusV { width: 1px; transition: transform .4s var(--ease-out); }
+.card:hover .plusV { transform: rotate(90deg); }
+
+.info { grid-column: 2; grid-row: 2; }
+.row { display: flex; justify-content: space-between; gap: 1em; }
+
+/* grid-template-rows 0fr to 1fr animates height without a fixed value. */
+.desc { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease-out); }
+.desc > * { min-height: 0; overflow: hidden; }
+.descText { display: block; padding-top: .5em; }
+
+@media (min-width: 992px) {
+  .card:hover .desc { grid-template-rows: 1fr; }
+}

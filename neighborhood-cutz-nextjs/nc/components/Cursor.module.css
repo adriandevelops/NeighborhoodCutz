@@ -1,0 +1,13 @@
+.cursor { position: fixed; top: 0; left: 0; z-index: 200; pointer-events: none; }
+.bubble {
+  display: inline-flex; align-items: center; gap: .5em;
+  background: var(--c-brand); color: #fff; padding: .5em .7em;
+  white-space: nowrap; font-size: var(--t-tag); letter-spacing: .06em;
+  opacity: 0; transform: scale(0);
+  transition: transform .15s cubic-bezier(.625, .05, 0, 1), opacity .15s cubic-bezier(.625, .05, 0, 1);
+}
+.cursor[data-cursor='active'] .bubble { opacity: 1; transform: scale(1); }
+
+@media (hover: none), (pointer: coarse) {
+  .cursor { display: none; }
+}

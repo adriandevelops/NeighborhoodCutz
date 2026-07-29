@@ -1,0 +1,164 @@
+/* ============================================================
+   BASE + GLOBAL UTILITIES
+   Only genuinely cross-component styles belong in this file.
+   Anything used by a single component goes in that component's
+   .module.css instead.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scrollbar-gutter: stable;
+  background: #000;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--c-light);
+  color: var(--c-dark);
+  font-family: var(--font-body);
+  font-size: var(--size-font);
+  line-height: 1.35;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; text-decoration: none; font-size: inherit; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-transform: inherit; }
+p { margin: 0; }
+
+:focus-visible { outline: 2px solid var(--c-brand); outline-offset: 3px; }
+
+/* Optical trim: strips half-leading so headings align to cap height. */
+h1, h2, h3, .h-lg, .h-md { display: flow-root; margin: 0; }
+h1::before, h2::before, h3::before, .h-lg::before, .h-md::before {
+  content: ''; display: table; margin-bottom: calc(-0.5lh + 0.38em);
+}
+h1::after, h2::after, h3::after, .h-lg::after, .h-md::after {
+  content: ''; display: table; margin-bottom: calc(-0.5lh + 0.37em);
+}
+
+/* ---------- layout primitives ---------- */
+.container { width: 100%; max-width: var(--size-container); margin-inline: auto; }
+.padding-global { width: 100%; padding-inline: var(--pad-global); position: relative; }
+.padding-section { padding-block: var(--pad-section); }
+.pt-0 { padding-top: 0; }
+.grid-global { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap-col); }
+@media (max-width: 767px) { .grid-global { grid-template-columns: repeat(4, 1fr); } }
+
+/* Sliders run overflow:visible so slides bleed past the container for the
+   peek effect. That bleed is clipped here, at the section.
+   Use `clip` not `hidden`: clip does not create a scroll container, so
+   position:sticky and scroll anchoring keep working.
+   NEVER put overflow-x:hidden on html or body to solve this. */
+.clip-x { overflow-x: clip; }
+
+/* ---------- type ----------
+   Justified setting is the defining choice of this design. Both the display
+   headings and the mono body are justified, which produces the stretched
+   word spacing throughout. It reverts to left-aligned under 768px because
+   justified type at narrow widths opens ugly rivers. */
+.h-lg, .h-md {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -.02em;
+  text-align: justify;
+}
+.h-lg { font-size: var(--t-h-lg); }
+.h-md { font-size: var(--t-h-md); }
+.body-mono { font-size: var(--t-tag); line-height: 1.55; text-align: justify; letter-spacing: .04em; }
+.tag-text { font-size: var(--t-tag); letter-spacing: .06em; }
+.mute { color: var(--c-mute); }
+
+.tag { display: inline-flex; align-items: center; gap: .5em; font-size: var(--t-tag); letter-spacing: .06em; }
+.tag-dot { width: .45em; height: .45em; background: currentColor; flex: none; }
+.link-arrow { display: inline-flex; align-items: center; gap: .4em; font-size: var(--t-tag); letter-spacing: .06em; }
+
+/* ---------- book button ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: .6em; align-self: flex-start;
+  border: 1px solid currentColor; padding: .9em 1.25em;
+  font-size: var(--t-tag); letter-spacing: .08em; line-height: 1;
+  transition: background .35s var(--ease-out), color .35s var(--ease-out), border-color .35s var(--ease-out);
+}
+.btn:hover, .btn:focus-visible { background: var(--c-brand); border-color: var(--c-brand); color: #fff; }
+.btn-solid { background: var(--c-brand); border-color: var(--c-brand); color: #fff; }
+.btn-solid:hover, .btn-solid:focus-visible { background: var(--c-dark); border-color: var(--c-dark); }
+
+/* ---------- crop marks ----------
+   Used inside the hero logo box, media frame, cards and footer. */
+.crop { position: absolute; inset: 0; pointer-events: none; }
+.crop i { position: absolute; width: .55em; height: .55em; border: 0 solid currentColor; }
+.crop .tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.crop .tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.crop .bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.crop .br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* ---------- section headers, shared by three sections ---------- */
+.section-head { display: flex; justify-content: space-between; align-items: center; gap: 1em; margin-bottom: 1.5em; }
+.section-intro { display: flex; flex-direction: column; gap: 1em; margin-bottom: 2.5em; }
+
+/* ---------- swiper: soundwave pagination ----------
+   Swiper injects its own class names at runtime, so these have to be
+   global rather than scoped to a CSS module. */
+.swiper { overflow: visible; cursor: grab; }
+.swiper:active { cursor: grabbing; }
+.swiper-slide { height: auto; transition: opacity .4s var(--ease-out); }
+
+.slider-wrap { position: relative; }
+@media (min-width: 768px) {
+  .slider-wrap:hover .swiper-slide { opacity: .2; }
+  .slider-wrap:hover .swiper-slide:hover { opacity: 1; }
+}
+
+.swiper-nav { display: flex; align-items: center; justify-content: center; gap: 1.5em; margin-top: 2.5em; }
+.nav-btn { display: inline-flex; align-items: center; gap: .4em; font-size: var(--t-tag); letter-spacing: .06em; }
+.nav-btn.is-disabled { opacity: .35; pointer-events: none; }
+.wave { display: flex; align-items: end; justify-content: center; gap: .3125em; height: 1.25em; }
+.wave .swiper-pagination-bullet {
+  width: 1px; opacity: .4; background: currentColor; border-radius: 0;
+  margin: 0 !important; transition: height .3s ease, opacity .3s ease; flex: none;
+}
+.wave .swiper-pagination-bullet:nth-child(5n+1) { height: .875em; }
+.wave .swiper-pagination-bullet:nth-child(5n+2) { height: 1.125em; }
+.wave .swiper-pagination-bullet:nth-child(5n+3) { height: .625em; }
+.wave .swiper-pagination-bullet:nth-child(5n+4) { height: 1em; }
+.wave .swiper-pagination-bullet:nth-child(5n+5) { height: .75em; }
+.wave .swiper-pagination-bullet-active { height: 1.25em !important; opacity: 1; }
+
+/* ---------- animation handles ----------
+   These target data attributes rather than classes, which CSS Modules
+   cannot scope, so they live here. Both are driven by components/Intro.jsx
+   and components/Cursor.jsx. */
+
+/* The hero bottom row starts hidden and is animated in by the intro. */
+[data-hero-bar] { opacity: 0; transform: translateY(2em); }
+
+/* Hide the native cursor only where the custom bubble replaces it. */
+@media (hover: hover) and (pointer: fine) {
+  [data-cursor-text] { cursor: none; }
+}
+
+/* ---------- state ---------- */
+body.is-locked { overflow: hidden; }
+
+/* Hidden until the intro timeline reveals it. Has a 2s JS failsafe. */
+.page-content { opacity: 0; visibility: hidden; }
+
+@media (max-width: 767px) {
+  .h-lg, .h-md, .body-mono { text-align: left; }
+  .h-lg, .h-md { letter-spacing: -.01em; }
+  .link-arrow, .nav-btn { min-height: 2.75em; display: inline-flex; align-items: center; }
+  .swiper-nav { gap: 1em; margin-top: 1.75em; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: .5em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .page-content { opacity: 1 !important; visibility: visible !important; }
+}

@@ -1,0 +1,17 @@
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding-top: 1.5em; color: var(--c-light);
+  mix-blend-mode: difference;
+  opacity: 0; transform: translateY(-2em);
+}
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap-col); align-items: start; }
+.logoCell { grid-column: 1 / 4; }
+.logo {
+  display: inline-block; border: 1px solid currentColor;
+  padding: .5em .75em; font-family: var(--font-display);
+  font-weight: 700; font-size: 1.35em; line-height: 1; letter-spacing: -.04em;
+}
+.links { grid-column: 6 / 13; display: flex; justify-content: space-between; }
+.link { display: flex; align-items: center; gap: .5em; }
+
+@media (max-width: 991px) { .links { display: none; } }
